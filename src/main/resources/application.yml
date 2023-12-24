@@ -4,7 +4,21 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/admin-management-db?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: diallo
-    password: passer
+    username: root
+    password: root
   application:
     name: spring-admin-management
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  info:
+    application:
+      name: admin-management
+      version: '@project.version@'

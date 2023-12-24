@@ -21,6 +21,12 @@ public class AppRolesService {
     private AppRolesMapper appRolesMapper;
     MessageSource messageSource; // permet de lire le fichier messages.properties dans resources
 
+    /**
+     * injection de dépendance par le constructeur
+     * @param iAppRoleRepository
+     * @param appRolesMapper
+     * @param messageSource
+     */
     public AppRolesService(IAppRoleRepository iAppRoleRepository, AppRolesMapper appRolesMapper, MessageSource messageSource) {
         this.iAppRoleRepository = iAppRoleRepository;
         this.appRolesMapper = appRolesMapper;

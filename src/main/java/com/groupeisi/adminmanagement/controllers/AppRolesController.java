@@ -5,6 +5,7 @@ import com.groupeisi.adminmanagement.services.AppRolesService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/roles")
-@AllArgsConstructor @NoArgsConstructor
+@NoArgsConstructor
 public class AppRolesController {
-    private AppRolesService appRolesService;
+    @Autowired
+    AppRolesService appRolesService;
 
     @GetMapping
     public List<AppRolesDto> getRoles(){

@@ -30,6 +30,6 @@ public class AppUserEntity {
     private int etat;
     @ManyToMany() // rélation plusieurs à plusieurs
     private List<AppRolesEntity> appRoleEntities;
-    @OneToMany(mappedBy = "appUserDto") // marque le côté propriétaire de la rélation et que mappedBy appUserDto => colonne étrangère de AppUserDto dans ProduitDto
+    @OneToMany(mappedBy = "appUserEntity") // marque le côté propriétaire de la rélation et que mappedBy appUserDto => colonne étrangère de AppUserDto dans ProduitDto
     private List<ProduitEntity> produitEntities;
 }
