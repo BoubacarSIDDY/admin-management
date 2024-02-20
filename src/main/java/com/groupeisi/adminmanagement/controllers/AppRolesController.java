@@ -6,23 +6,26 @@ import jakarta.validation.Valid;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/roles")
+@RequestMapping("/api/roles")
 @NoArgsConstructor
 public class AppRolesController {
     @Autowired
     AppRolesService appRolesService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER')")
     public List<AppRolesDto> getRoles(){
         return appRolesService.getAppRoles();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public AppRolesDto getAppRole(@PathVariable("id") int id){
         return appRolesService.getAppRole(id);
     }
@@ -41,5 +44,10 @@ public class AppRolesController {
     @DeleteMapping("{id}")
     public void deleteAppRole(@PathVariable("id") int id){
         appRolesService.deleteAppRoles(id);
+    }
+
+    @GetMapping("/sessions")
+    public Authentication authentication(Authentication authentication){
+        return authentication;
     }
 }

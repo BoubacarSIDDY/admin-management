@@ -16,7 +16,14 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
+        format_sql:
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/admin-realm
+          jwt-set-uri: http://localhost:8080/realms/admin-realm/protocol/openid-connect/certs
 
   info:
     application:

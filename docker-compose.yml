@@ -31,6 +31,16 @@ services:
       - mysql-admin-management-db
     restart: unless-stopped
 
+  # configuration de keycloak
+  keycloak:
+    image: bitnami/keycloak:23.0.6
+    container_name: auth_keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - 8080:8080
+
 volumes:
   mysql_data:
     driver: local
