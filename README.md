@@ -121,5 +121,13 @@ volumes:
 ```
 
 #### Endpoint :
-> Ci-dessous une capture sur l'endPoint pour la gestion des rôles : **/roles**
+> Ci-dessous une capture sur l'endPoint pour la gestion des rôles : **/roles** : 
+> **Liste des roles**
+![Screenshot 2023-12-25 031317](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/7bb1894a-0c72-46bc-aed7-2d94abd61bbe)
+> **Récupération du role avec l'id 1**
+> ![Screenshot 2023-12-25 031438](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/ac12816f-e148-4144-b4ae-8b5f1f4fc5aa)
+> **Récupération d'un role qui n'existe pas, message d'erreur d'exception**
+> ![Screenshot 2023-12-25 031612](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/182ded86-0bf7-41f8-85ff-8cafa7aa7a95)
+
+
 
