@@ -5,6 +5,8 @@ import com.groupeisi.adminmanagement.exceptions.EntityNotFoundException;
 import com.groupeisi.adminmanagement.exceptions.RequestException;
 import com.groupeisi.adminmanagement.mapping.AppRolesMapper;
 import com.groupeisi.adminmanagement.repositories.IAppRoleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class AppRolesService {
+    Logger logger = LoggerFactory.getLogger(AppRolesService.class);
     private IAppRoleRepository iAppRoleRepository;
     private AppRolesMapper appRolesMapper;
     MessageSource messageSource; // permet de lire le fichier messages.properties dans resources
@@ -35,6 +38,7 @@ public class AppRolesService {
 
     @Transactional(readOnly = true)
     public List<AppRolesDto> getAppRoles() {
+        logger.info("list of roles");
         return StreamSupport.stream(iAppRoleRepository.findAll().spliterator(), false)
                 .map(appRolesMapper::toAppRolesDto)
                 .collect(Collectors.toList());

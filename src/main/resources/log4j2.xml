@@ -19,7 +19,7 @@
         </Console>
         <!-- config fichier de log -->
         <File name="file" fileName="logs/logs.log">
-            <!--PatternLayout pattern="[%t] %-5p | %-60c | %m (%F:%L)%n" /-->
+            <PatternLayout pattern="[%t] %-5p | %-60c | %m (%F:%L)%n" />
             <JsonLayout complete="false" compact="false">
                 <KeyValuePair key="service" value="admin-management"/>
             </JsonLayout>

@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,7 +34,7 @@ class AppRolesServiceTest {
     @Test
     void createAppRoles() {
         AppRolesDto appRolesDto = new AppRolesDto();
-        appRolesDto.setName("ROLE_COMPTABLE1");
+        appRolesDto.setName("ROLE_"+ UUID.randomUUID());
         AppRolesDto appRolesDtoSave = appRolesService.createAppRoles(appRolesDto);
         Assertions.assertNotNull(appRolesDtoSave);
     }

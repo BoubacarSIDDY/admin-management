@@ -29,3 +29,7 @@ spring:
     application:
       name: admin-management
       version: '@project.version@'
+
+logging:
+  file:
+    name: E:/cours/M2/JAVA/tp/admin-management/logs/logs.log
