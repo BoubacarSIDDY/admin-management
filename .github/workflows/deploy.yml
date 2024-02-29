@@ -17,6 +17,6 @@ jobs:
       - name: loging to docker hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
       - name: tag image
-        run: docker tag admin-management:2.0 boubacarsiddy/admin-management:2.0
+        run: docker tag admin-management boubacarsiddy/admin-management:2.0
       - name: pushing to docker hub
         run: docker push boubacarsiddy/admin-management:2.0
