@@ -1,0 +1,22 @@
+name: build and push a docker image with docker compose file into docker hub
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**/README.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Build docker images using docker compose file
+        run: docker compose build
+      - name: loging to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+      - name: tag image
+        run: docker tag admin-management:2.0 boubacarsiddy/admin-management:2.0
+      - name: pushing to docker hub
+        run: docker push boubacarsiddy/admin-management:2.0
