@@ -16,7 +16,7 @@ jobs:
         run: docker compose build
       - name: loging to docker hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: tag image
-        run: docker tag admin-management:1.0 boubacarsiddy/admin-management:2.0
+      - name: build using docker file
+        run: docker build -t ${{ secrets.DOCKER_USER }}/admin-management:2.0
       - name: pushing to docker hub
-        run: docker push boubacarsiddy/admin-management:2.0
+        run: docker push ${{ secrets.DOCKER_USER }}/admin-management:2.0
