@@ -16,21 +16,6 @@ services:
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
 
-  app-admin-backend:
-    image: admin-management:1.0
-    container_name: container-app-backend
-    ports:
-      - 8083:8083
-    restart: unless-stopped
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    environment:
-      directoryDatas: /app/data/
-    volumes:
-      - ./datas:/app/data
-
-
   phpmyadmin-admin-db:
     container_name: container_phpmyadmin-adminmgntdb
     image: phpmyadmin/phpmyadmin:latest
@@ -95,7 +80,6 @@ services:
       - postgres-service
 
 volumes:
-  datas:
   pgadmin_data:
   postgres_data:
   mysql_data:
