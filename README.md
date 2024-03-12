@@ -133,14 +133,20 @@ Le fichier `.github/workflows/deploy.yml` définit un workflow GitHub Actions qu
 ![Capture d'écran 2024-03-12 095037](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/3a980d1f-bb19-4290-ab01-0ff8ea5f8927)
 
 ## Configuration keycloak
-1. **Création d'un realm**: est un domaine qui gère un ensemble d'utilisateurs, d'informations d'identification, des rôles et des groupes
+1. **Création d'un realm**: un realm est un domaine qui gère un ensemble d'utilisateurs, d'informations d'identification, des rôles et des groupes
+![Screenshot 2024-02-14 001035](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/f88cc0e4-0806-4a59-8cb1-221431dd75ee)
 2. **Création d'un client**: un client est une application, les clients sont des entités pouvant demander à Keycloak d'authentifier un utilisateur
+![Screenshot 2024-02-14 002558](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/bc3f215a-88b6-4d93-bf1a-9cf470eacf98)
+![Screenshot 2024-02-14 002627](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/5e006eda-3cb3-4936-b5ad-cacea6737063)
+![Screenshot 2024-02-14 002656](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/84aca78c-e9c8-4fc0-9868-4aa24dc615c9)
 3. **Création des rôles :** les rôles identifient un type ou une catégorie d'utilisateur, dans notre cas on a créé deux rôles (ADMIN,USER)
+#### Endpoint :![Screenshot 2024-02-14 002928](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/617881a0-c202-4ef6-b2ea-5c3f96f3dfdf)
 4. **Création des utilisateurs** : les utilisateurs sont des entités pouvant se connecter à notre système
+![Screenshot 2024-02-14 003053](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/e9177bc1-fa04-47ab-9c7b-d58f27e69aa6)
+![Screenshot 2024-02-14 003236](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/41d90938-a533-4f97-9066-187b29ac9811)
 5. **Assigner des rôles aux utilisateurs** : faire appartenir un utilisateur à une catégorie
+![Screenshot 2024-02-14 003436](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/dfe5ddfb-0aa9-4787-a118-efd9a5c2e22c)
 
-
-#### Endpoint :
 > Ci-dessous une capture sur l'endPoint pour la gestion des rôles : **/roles** : 
 > **Liste des roles**
 ![Screenshot 2023-12-25 031317](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/7bb1894a-0c72-46bc-aed7-2d94abd61bbe)
