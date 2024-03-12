@@ -147,7 +147,41 @@ Le fichier `.github/workflows/deploy.yml` définit un workflow GitHub Actions qu
 5. **Assigner des rôles aux utilisateurs** : faire appartenir un utilisateur à une catégorie
 ![Screenshot 2024-02-14 003436](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/dfe5ddfb-0aa9-4787-a118-efd9a5c2e22c)
 
-> Ci-dessous une capture sur l'endPoint pour la gestion des rôles : **/roles** : 
+## Test avec Postman
+
+Pour tester les différentes fonctionnalités de l'API, nous utilisons Postman. Voici comment configurer les requêtes d'authentification :
+Ces requêtes permettront d'obtenir un token d'authentification que nous pourrons utiliser pour tester les différentes fonctionnalités de l'API.
+
+### 1. Authentification avec mot de passe
+
+Pour utiliser l'authentification avec mot de passe, envoyez une requête **POST** à l'endpoint `http://localhost:8080/realms/admin-management-realm/protocol/openid-connect/token` avec les paramètres suivants dans le corps de la requête :
+
+- `grant_type` : `password`
+- `username` : `<votre_nom_d_utilisateur>`
+- `password` : `<votre_mot_de_passe>`
+- `client_id` : `<votre_client_id>`
+![Screenshot 2024-02-14 004533](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/3130db08-744c-42fe-8d0f-daa6c4191e41)
+![Screenshot 2024-02-14 004748](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/249fd50b-1cf9-4ba2-b920-8193e66f8219)
+
+### 2. Authentification avec client_credentials
+
+Pour utiliser l'authentification avec les identifiants du client, envoyez une requête **POST** à l'endpoint `http://localhost:8080/realms/admin-management-realm/protocol/openid-connect/token` avec les paramètres suivants dans le corps de la requête :
+
+- `grant_type` : `client_credentials`
+- `client_id` : `<votre_client_id>`
+- `client_secret` : `<votre_client_secret>`
+
+### 3. Authentification avec refresh_token
+
+Pour utiliser l'authentification avec le token de rafraîchissement (refresh token), envoyez une requête **POST** à l'endpoint `http://localhost:8080/realms/admin-management-realm/protocol/openid-connect/token` avec les paramètres suivants dans le corps de la requête :
+
+- `grant_type` : `refresh_token`
+- `refresh_token` : `<votre_refresh_token>`
+- `client_id` : `<votre_client_id>`
+- `client_secret` : `<votre_client_secret>`
+![Screenshot 2024-02-14 005829](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/6b858fe5-1df8-47c7-b317-194388582bc3)
+
+### Test des endpoints sécurisés
 > **Liste des roles**
 ![Screenshot 2023-12-25 031317](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/7bb1894a-0c72-46bc-aed7-2d94abd61bbe)
 > **Récupération du role avec l'id 1**
