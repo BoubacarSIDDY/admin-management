@@ -1,6 +1,6 @@
 # Documentation
 
-> Ce projet a pour but de mettre en place une application spring boot sécurisé en utilisant keycloak comme service de sécurité et ELK pour l'analyse des logs.
+> Ce projet est une application Spring Boot qui intègre Keycloak pour la sécurité des utilisateurs et ELK (Elasticsearch, Logstash, Kibana) pour l'analyse des logs. De plus, il inclut une configuration GitHub Actions pour le déploiement sur Docker Hub.
 
 ## Configuration du projet
 Ci-dessous le détails des packages et quelques configurations à faire
