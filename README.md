@@ -1,73 +1,24 @@
-# Documentation
+# Spring Admin Management - Sécurisé, Analyse de journaux et Déploiement automatisé
+> Ce projet implémente une application Spring Boot avec une sécurité robuste utilisant Keycloak, une analyse de journaux centralisée avec la pile ELK (l'intégration n'est pas incluse dans cet exemple) et un déploiement automatisé via GitHub Actions.
 
-> Ce projet est une application Spring Boot qui intègre Keycloak pour la sécurité des utilisateurs et ELK (Elasticsearch, Logstash, Kibana) pour l'analyse des logs. De plus, il inclut une configuration GitHub Actions pour le déploiement sur Docker Hub.
+## Fonctionnalités principales
+* **Authentification sécurisée:** Exploite Keycloak pour l'authentification et l'autorisation des utilisateurs, garantissant un accès contrôlé à votre application.
+* **Journalisation centralisée:** S'intègre à la pile ELK (Elasticsearch, Logstash et Kibana) pour une analyse complète des journaux, fournissant des informations précieuses sur le comportement de l'application (configuration requise).
+* **Déploiement automatisé:** Utilise GitHub Actions pour rationaliser le processus de construction, de test et de déploiement vers Docker Hub lors de la publication des modifications sur la branche principale.
+  
+## Instructions d'utilisation
+1. Cloner le repository.
+2. Docker installé et en cours d'exécution (https://docs.docker.com/get-docker/)
+3. Une instance ELK Stack en cours d'exécution (pour l'analyse des logs)
+4. Configurer Keycloak (voir les captures à la section *Configuration keycloak*)
+5. Modifier les configurations d'accès à Docker Hub dans les secrets de votre repository GitHub (voir les captures à la section *Génération token docker hub*)
+6. Pousser les modifications vers la branche principale pour déclencher le déploiement automatique.
 
-## Configuration du projet
-Ci-dessous le détails des packages et quelques configurations à faire
-1. #### Détails des différents packages:
-* **config** : dans ce package nous avons gérés : les logs `LoggingAspect` d'une manière généralisée et aussi nous avons une classe `ApplicationConfig` pour gérer les jeux de caractères.
-* **controlles** : nous utilisons des rest controllers.
-* **dto** : pour la transformation de nos entités, pour éviter la manipulation directe des données.
-* **entities** : ce package comme son nom l'indique contient nos entités
-* **exceptions** : pour la gestion des exceptions : on a géré deux types d'exceptions (`EntityNotFoundException`,`RequestException`)
-* **mapping** : ce package contient les classes de mapping (la transformation des dtos en entité et vice versa)
-* **repositories** : les interfaces repository de chacune des nos entités
-* **services** : ce package contient nos services
-2. #### Quelques configurations à faire : 
-> **Logs avec log4j** 
-Créez un fichier `log4j2.xml` dans le dossier **resources** avec la configuration suivante :
-```bash
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
-    <Properties>
-        <Property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</Property>
-        <Property name="LOG_PATTERN_LEVEL">%-5level [admin-management,%X{traceId},%X{spanId}]</Property>
-        <Property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</Property>
-        <Property name="LOG_PATTERN">%clr{%d{${sys:LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${sys:LOG_PATTERN_LEVEL}} %clr{%pid}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
-    </Properties>
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="${sys:LOG_PATTERN}"/>
-        </Console>
-        <Console name="Console_JSON" target="SYSTEM_OUT" follow="true">
-            <JsonLayout complete="false" compact="false">
-                <KeyValuePair key="service" value="admin-management"/>
-                <KeyValuePair key="traceId" value="$${ctx:traceId}"/>
-                <KeyValuePair key="spanId" value="$${ctx:spanId}"/>
-            </JsonLayout>
-        </Console>
-        <!-- config fichier de log -->
-        <File name="file" fileName="logs/logs.log">
-            <!--PatternLayout pattern="[%t] %-5p | %-60c | %m (%F:%L)%n" /-->
-            <JsonLayout complete="false" compact="false">
-                <KeyValuePair key="service" value="admin-management"/>
-            </JsonLayout>
-        </File>
-        <!-- config fichier de log -->
-    </Appenders>
+## Messages d'exceptions dans `messages.properties`
+Dans notre application, les messages d'exceptions sont personnalisés et définis dans le fichier `messages.properties` qui se trouve dans le dossier **resources**. Ces messages sont également enregistrés dans le fichier `/logs/logs.log`.
+Vous pouvez personnaliser ces messages selon vos besoins. Voici les messages actuellement définis :
 
-    <Loggers>
-        <Root level="info">
-            <AppenderRef ref="Console" /><!-- pour avoir le format texte des logs -->
-            <!-- AppenderRef ref="Console_JSON" / --><!-- pour avoir le format json des logs -->
-            <AppenderRef ref="file" /><!-- config fichier de log -->
-        </Root>
-
-        <Logger name="com.groupeisi.adminmanagement.controllers" level="debug" additivity="false">
-            <AppenderRef ref="Console_JSON" />
-        </Logger>
-
-        <Logger name="com.groupeisi.adminmanagement.services" level="debug" additivity="false">
-            <AppenderRef ref="Console_JSON" />
-        </Logger>
-
-    </Loggers>
-
-</Configuration>
-```
-> **Messages d'exceptions dans `messages.properties`**
-Créez le fichier messages.properties dans le dossier **resources** et ajoutez les messages d'exceptions :
-```bash
+```properties
 role.notfound=Requested Roles with id = {0} does not exist
 role.exists=the Roles with id = {0} is already created
 role.errordeletion=the Roles with id = {0} cannot be deleted
@@ -80,45 +31,48 @@ produit.notfound=Requested Product with id = {0} does not exist
 produit.exists=the Product with id = {0} is already created
 produit.errordeletion=the Product with id = {0} cannot be deleted
 ```
-> **Configuration de la base de données avec Docker**
-Utilisez le fichier docker-compose.yml à la racine du projet avec le code suivant :
-```bash
-version: '3.9'
-services:
-    mysql-admin-management-db:
-      image: mysql:latest
-      container_name: container_mysql-admin-management-db
-    environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: admin-management-db
-        MYSQL_USER: diallo
-        MYSQL_PASSWORD: passer
-    ports:
-    - 3306:3306
-    volumes:
-    - mysql_data:/var/lib/mysql
-    healthcheck:
-    test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
-
-
-    phpmyadmin-admin-db:
-        container_name: container_phpmyadmin-adminmgntdb
-        image: phpmyadmin/phpmyadmin:latest
-    ports:
-    - 8085:80
-    environment:
-        MYSQL_ROOT_PASSWORD: root
-        PMA_HOST: mysql-admin-management-db
-        PMA_USER: diallo
-        PMA_PASSWORD: passer
-    depends_on:
-    - mysql-admin-management-db
-    restart: unless-stopped
-
-volumes:
-    mysql_data:
-    driver: local
+## Docker Compose
+Le fichier `docker-compose.yml` contient la configuration pour les services MySQL, phpMyAdmin, PostgreSQL, pgAdmin, et Keycloak.
+> *L'application Spring Boot utilise MySQL comme base de données principale. Assurez-vous de configurer correctement les paramètres de connexion dans le fichier `application.yml`. Voici un exemple de configuration :*
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/admin-management-db?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+  application:
+    name: spring-admin-management
 ```
+> *Keycloak, d'autre part, est connecté à une base de données PostgreSQL. La configuration de Keycloak dans le fichier docker-compose.yml assure que Keycloak utilise la base de données PostgreSQL définie dans le service postgres-service:*
+```yaml
+keycloak-service:
+  image: quay.io/keycloak/keycloak:latest
+  environment:
+    KC_DB: postgres
+    KC_DB_URL: jdbc:postgresql://postgres-service:5432/keycloak_db
+    KC_DB_USERNAME: keycloak
+    KC_DB_PASSWORD: k1234
+    KEYCLOAK_ADMIN: admin
+    KC_HTTP_ENABLED: "true"
+    KC_HOSTNAME_STRICT_HTTPS: "false"
+    KEYCLOAK_ADMIN_PASSWORD: passer
+  command:
+    - start-dev
+  restart: always
+  ports:
+    - '8080:8080'
+  expose:
+    - '8080'
+  depends_on:
+    - postgres-service
+```
+## Application Configuration
+Le fichier `application.yml` contient la configuration de l'application Spring Boot, y compris la configuration de la base de données, la sécurité avec Keycloak, et les paramètres de logging.
+![Capture d'écran 2024-03-12 095338](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/6efe2fd8-5aa7-42ab-8a1e-4acebaaf6e04)
+
+## GitHub Actions
+Le fichier `.github/workflows/deploy.yml` définit un workflow GitHub Actions qui construit et pousse une image Docker contenant l'application vers Docker Hub lors d'un push sur la branche principale (main).
+![Capture d'écran 2024-03-12 095037](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/3a980d1f-bb19-4290-ab01-0ff8ea5f8927)
 
 #### Endpoint :
 > Ci-dessous une capture sur l'endPoint pour la gestion des rôles : **/roles** : 
