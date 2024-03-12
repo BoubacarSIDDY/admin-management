@@ -190,4 +190,6 @@ Pour utiliser l'authentification avec le token de rafraîchissement (refresh tok
 > ![Screenshot 2023-12-25 031612](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/182ded86-0bf7-41f8-85ff-8cafa7aa7a95)
 
 
+## Capture des logs (ELK)
+
 
