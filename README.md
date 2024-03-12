@@ -1,6 +1,6 @@
 # Documentation
 
-> Ce projet a pour but de mettre en place une application spring boot en utilisant maven comme gestionnaire du cycle de vie de notre application.
+> Ce projet a pour but de mettre en place une application spring boot sécurisé en utilisant keycloak comme service de sécurité et ELK pour l'analyse des logs.
 
 ## Configuration du projet
 Ci-dessous le détails des packages et quelques configurations à faire
