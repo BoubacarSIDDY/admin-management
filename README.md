@@ -140,7 +140,7 @@ Le fichier `.github/workflows/deploy.yml` définit un workflow GitHub Actions qu
 ![Screenshot 2024-02-14 002627](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/5e006eda-3cb3-4936-b5ad-cacea6737063)
 ![Screenshot 2024-02-14 002656](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/84aca78c-e9c8-4fc0-9868-4aa24dc615c9)
 3. **Création des rôles :** les rôles identifient un type ou une catégorie d'utilisateur, dans notre cas on a créé deux rôles (ADMIN,USER)
-#### Endpoint :![Screenshot 2024-02-14 002928](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/617881a0-c202-4ef6-b2ea-5c3f96f3dfdf)
+![Screenshot 2024-02-14 002928](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/617881a0-c202-4ef6-b2ea-5c3f96f3dfdf)
 4. **Création des utilisateurs** : les utilisateurs sont des entités pouvant se connecter à notre système
 ![Screenshot 2024-02-14 003053](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/e9177bc1-fa04-47ab-9c7b-d58f27e69aa6)
 ![Screenshot 2024-02-14 003236](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/41d90938-a533-4f97-9066-187b29ac9811)
