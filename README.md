@@ -191,5 +191,6 @@ Pour utiliser l'authentification avec le token de rafraîchissement (refresh tok
 
 
 ## Capture des logs (ELK)
+![elk](https://github.com/BoubacarSIDDY/admin-management/assets/75427522/9bb45502-575d-4454-a2fa-4e686b136c66)
 
 
